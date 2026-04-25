@@ -1,0 +1,158 @@
+CANCELLATION POLICY — ShopNest
+Last Updated: April 2026
+=============================================================
+
+OVERVIEW
+--------
+We understand that plans change. ShopNest allows order cancellations under
+certain conditions. This policy explains when you can cancel an order, how to
+do it, and what happens after cancellation.
+
+---------------------------------------------------------------
+1. CANCELLATION WINDOW
+---------------------------------------------------------------
+You can cancel your order within the following timeframes:
+
+a) Before Dispatch (Best case — full refund):
+   - You may cancel your order any time before it is dispatched from our warehouse.
+   - Orders can be cancelled instantly through the "My Orders" section on our website.
+   - A full refund is issued to your original payment method within 5-7 business days.
+
+b) After Dispatch but Before Delivery (Limited cancellation):
+   - Once an order has been dispatched, it cannot be cancelled directly.
+   - You may refuse the delivery at the door. The package will be returned to us.
+   - Upon receipt of the returned package, a refund will be initiated minus any
+     return shipping charges (Rs. 99 / $5).
+
+c) After Delivery (Treated as a Return):
+   - If the order has already been delivered, cancellation is not applicable.
+   - Please refer to our Refund Policy for return and refund options.
+
+---------------------------------------------------------------
+2. HOW TO CANCEL AN ORDER
+---------------------------------------------------------------
+Method 1 — Self-Service (Recommended, fastest):
+  Step 1: Log into your ShopNest account.
+  Step 2: Go to "My Orders" and select the order you wish to cancel.
+  Step 3: Click "Cancel Order" and select a reason from the dropdown.
+  Step 4: Confirm the cancellation.
+  Step 5: You will receive a cancellation confirmation email within minutes.
+
+Method 2 — Contact Support:
+  - Email: support@shopnest.com with your Order ID and reason for cancellation.
+  - Phone: 1-800-SHOPNEST (Mon-Sat, 9 AM - 6 PM IST)
+  - Live Chat: Available on our website (Mon-Sat, 9 AM - 9 PM IST)
+
+Note: Cancellations requested via email or phone are subject to processing time.
+If the order is dispatched before we can process your request, it will be
+treated as a post-dispatch cancellation.
+
+---------------------------------------------------------------
+3. PARTIAL CANCELLATIONS
+---------------------------------------------------------------
+- If your order contains multiple items, you can cancel individual items
+  without cancelling the entire order (only if the item has not been dispatched).
+- To cancel a specific item, go to "My Orders", select the order, and click
+  "Cancel Item" next to the product you want to remove.
+- Refund for the cancelled item will be processed within 5-7 business days.
+
+---------------------------------------------------------------
+4. CANCELLATION BY SHOPNEST
+---------------------------------------------------------------
+In rare cases, ShopNest may cancel your order due to the following reasons:
+
+- Item out of stock or discontinued after order placement
+- Pricing or product description errors on our website
+- Suspected fraudulent activity or policy violations
+- Inability to verify payment or customer information
+- Shipping restrictions for your delivery address
+
+In such cases:
+- We will notify you via email within 24-48 hours.
+- A full refund will be issued to your original payment method.
+- We will suggest alternative products where possible.
+
+---------------------------------------------------------------
+5. CANCELLATION AND REFUND TIMELINE
+---------------------------------------------------------------
+Cancellation Type           Refund Timing
+---------------------------+---------------------------------------
+Before dispatch             | Full refund: 5-7 business days
+After dispatch (refused)    | Refund after return received: 7-10 business days
+                            | Minus return shipping fee (Rs. 99 / $5)
+Cancelled by ShopNest       | Full refund: 3-5 business days
+Partial cancellation        | Item refund: 5-7 business days
+
+Refunds are credited to:
+- Original payment method (credit/debit card, UPI, net banking)
+- Wallet balance (if paid via ShopNest wallet)
+- Store credit (optional, applied instantly)
+
+---------------------------------------------------------------
+6. CANCELLATIONS FOR SPECIAL ORDER TYPES
+---------------------------------------------------------------
+a) Customized / Personalized Orders:
+   - Cannot be cancelled once production has started.
+   - Cancellation is only possible within 2 hours of placing the order.
+   - Contact us immediately at support@shopnest.com if you need to cancel.
+
+b) Pre-Orders:
+   - Pre-orders can be cancelled any time before the item ships.
+   - Full refund will be issued to your original payment method.
+
+c) Subscription Orders:
+   - You can pause or cancel your subscription at any time from your account settings.
+   - Cancelling a subscription stops future billing but does not refund
+     already-processed subscription cycles.
+   - The subscription remains active until the end of the current billing period.
+
+d) Flash Sale / Limited-Time Offers:
+   - Orders placed during flash sales can be cancelled only before dispatch.
+   - Once dispatched, they follow the post-dispatch cancellation process.
+   - Refunds may be issued as store credit in some flash sale scenarios.
+
+---------------------------------------------------------------
+7. NON-CANCELLABLE ORDERS
+---------------------------------------------------------------
+The following orders cannot be cancelled under any circumstances:
+
+- Orders that have already been delivered
+- Digital product orders (software, e-books, downloadable content) once
+  the download link has been accessed or the product has been activated
+- Gift card purchases
+- Items that are already in transit and cannot be recalled
+
+---------------------------------------------------------------
+8. FREQUENTLY ASKED QUESTIONS — CANCELLATIONS
+---------------------------------------------------------------
+Q: Can I cancel an order on a holiday?
+A: Yes. Self-service cancellation via "My Orders" is available 24/7. However,
+   support-assisted cancellations are processed on business days only.
+
+Q: What if I accidentally cancel my order?
+A: Once an order is cancelled, it cannot be reversed. Please place a new order.
+   If the item is back in stock and prices have changed, the new price applies.
+
+Q: Will I be charged a cancellation fee?
+A: No. ShopNest does not charge any cancellation fees for orders cancelled
+   before dispatch. Post-dispatch cancellations (refused delivery) incur
+   a return shipping fee of Rs. 99 / $5.
+
+Q: How will I know my cancellation was successful?
+A: You will receive a cancellation confirmation email with details of your
+   refund timeline.
+
+---------------------------------------------------------------
+9. CONTACT US
+---------------------------------------------------------------
+For all cancellation-related queries:
+
+Email:   support@shopnest.com
+Phone:   1-800-SHOPNEST (Mon-Sat, 9 AM - 6 PM IST)
+Chat:    Live chat available on our website (Mon-Sat, 9 AM - 9 PM IST)
+Orders:  www.shopnest.com/my-orders
+
+=============================================================
+ShopNest reserves the right to modify this Cancellation Policy at any time.
+The policy in effect at the time of your order applies to that transaction.
+=============================================================

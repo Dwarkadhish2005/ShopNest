@@ -1,0 +1,285 @@
+FREQUENTLY ASKED QUESTIONS (FAQ) — ShopNest
+Last Updated: April 2026
+=============================================================
+
+This document contains answers to the most common customer questions.
+It is organized by category to help the AI support agent quickly retrieve
+and respond to customer queries.
+
+=============================================================
+SECTION A: ORDERS & PURCHASING
+=============================================================
+
+Q1: How do I place an order on ShopNest?
+A: To place an order, browse our website and add items to your cart. When ready,
+   click "Checkout", enter your shipping address, choose a shipping method, and
+   complete payment. You will receive an order confirmation email immediately.
+
+Q2: Can I order without creating an account?
+A: Yes. ShopNest supports Guest Checkout. However, creating an account lets you
+   track orders, save addresses, earn loyalty points, and view order history.
+
+Q3: How do I know if my order was placed successfully?
+A: You will receive a confirmation email with your Order ID within 5-10 minutes
+   of placing your order. Check your spam folder if you don't see it.
+
+Q4: Can I make changes to my order after placing it?
+A: You can modify your order (change size, color, or address) only if it has not
+   been dispatched yet. Contact us immediately at support@shopnest.com or via
+   live chat. Once dispatched, changes are not possible.
+
+Q5: Can I add items to an existing order?
+A: No. Once an order is placed, you cannot add items to it. Please place a
+   separate order for any additional items.
+
+Q6: Why was my order not placed even though payment was deducted?
+A: This can happen due to a technical error. The deducted amount will be
+   automatically refunded within 5-7 business days. Contact support@shopnest.com
+   with your transaction reference number if it is not refunded.
+
+Q7: Do you offer bulk or wholesale orders?
+A: Yes. For bulk orders above 50 units, contact our B2B team at
+   wholesale@shopnest.com for special pricing and dedicated support.
+
+=============================================================
+SECTION B: PAYMENTS
+=============================================================
+
+Q8: What payment methods do you accept?
+A: ShopNest accepts the following payment methods:
+   - Credit/Debit Cards (Visa, MasterCard, RuPay, Amex)
+   - UPI (Google Pay, PhonePe, Paytm, BHIM)
+   - Net Banking (all major banks)
+   - ShopNest Wallet
+   - EMI (on orders above Rs. 3000, select banks)
+   - Cash on Delivery (COD) — available on orders below Rs. 5000 in select locations
+   - PayPal (international orders)
+
+Q9: Is it safe to use my card on ShopNest?
+A: Yes. ShopNest uses 256-bit SSL encryption and is PCI-DSS compliant. We do not
+   store your card details on our servers.
+
+Q10: Why was my payment declined?
+A: Possible reasons include: insufficient funds, incorrect card details, bank
+   security block, or expired card. Try another payment method or contact your
+   bank. If the problem persists, contact support@shopnest.com.
+
+Q11: Can I pay using multiple payment methods for a single order?
+A: You can use a combination of ShopNest Wallet balance + one other payment method.
+   Splitting between two cards or UPI and a card is not supported at this time.
+
+Q12: How does Cash on Delivery (COD) work?
+A: COD is available for eligible orders. Pay the exact amount to the delivery
+   person at the time of delivery. COD orders cannot be partially paid — have
+   the exact amount ready.
+
+Q13: How do I apply a coupon or promo code?
+A: At checkout, enter your coupon code in the "Promo Code" field and click "Apply".
+   Only one promo code can be used per order. Codes cannot be combined with
+   other offers unless stated otherwise.
+
+Q14: Do promo codes have an expiry date?
+A: Yes. Each promo code has a validity period displayed in the promotion. Expired
+   codes cannot be applied even if they appear in your email history.
+
+=============================================================
+SECTION C: SHIPPING & DELIVERY
+=============================================================
+
+Q15: How long does delivery take?
+A: Estimated delivery times:
+   - Standard Shipping: 5-7 business days
+   - Express Shipping: 2-3 business days
+   - Same-Day Delivery (select cities): By 9 PM same day (order before 10 AM IST)
+   - International: 10-20 business days
+
+Q16: How do I track my order?
+A: Once your order is dispatched, you will receive a tracking number via email
+   and SMS. Track your order at www.shopnest.com/track-order or on the
+   carrier's website.
+
+Q17: Can I change my delivery address after placing an order?
+A: Address changes are possible only before dispatch. Contact support@shopnest.com
+   immediately. Once dispatched, we cannot change the delivery address.
+
+Q18: What happens if I miss my delivery?
+A: The carrier will attempt delivery up to 3 times. After 3 failed attempts, the
+   package is returned to our warehouse and you will be contacted for further action.
+
+Q19: Do you deliver on Sundays and holidays?
+A: Standard and Express shipping partners may deliver on Sundays in metro cities.
+   Same-day delivery does not operate on national holidays. Check carrier
+   information in your tracking details.
+
+Q20: I live in a remote area. Do you deliver there?
+A: We deliver to most serviceable pin codes. Enter your pin code at checkout to
+   check availability. If your area is not serviceable, you will be notified.
+
+Q21: My tracking shows "Delivered" but I haven't received the package. What do I do?
+A: Wait 24 hours as packages are sometimes scanned early. Check with neighbors
+   or building security. If still not found, contact support@shopnest.com within
+   7 days of the expected delivery date.
+
+=============================================================
+SECTION D: RETURNS & REFUNDS
+=============================================================
+
+Q22: What is ShopNest's return policy?
+A: Items can be returned within 30 days of delivery if they are unused, in
+   original packaging, and accompanied by proof of purchase. See our full
+   Refund Policy for details.
+
+Q23: How do I initiate a return?
+A: Log into your account, go to "My Orders", select the item, and click "Return
+   Item". Fill in the reason and submit. You'll receive an RMA number and return
+   instructions within 2 business days.
+
+Q24: How long does it take to get a refund?
+A: After we receive and inspect the returned item (3-5 business days), the
+   refund is credited to your original payment method within 5-10 business days.
+   Total time: approximately 5-15 business days from return receipt.
+
+Q25: Can I return a sale or discounted item?
+A: Items bought during regular sales can be returned if they meet return
+   conditions. Items marked "Final Sale" or "Non-Returnable" at the time of
+   purchase are not eligible for return.
+
+Q26: What if I received a wrong or defective item?
+A: Report it within 48 hours of delivery by emailing support@shopnest.com with
+   photos and your order number. We will send a replacement or issue a full
+   refund at no cost to you.
+
+Q27: Do I have to pay for return shipping?
+A: Only if the return is due to change of mind. If the return is due to our error
+   (wrong item, damage, defect), we provide a free prepaid return label.
+
+Q28: Can I exchange an item instead of returning it?
+A: Yes. During the return request, select "Exchange" and choose the new size or
+   color. Exchanges are subject to stock availability.
+
+=============================================================
+SECTION E: CANCELLATIONS
+=============================================================
+
+Q29: How do I cancel my order?
+A: Go to "My Orders" on our website, select the order, and click "Cancel Order".
+   Cancellation is instant before dispatch. If the order is already dispatched,
+   you may refuse delivery for a refund (minus return shipping charges).
+
+Q30: Can I cancel only one item in a multi-item order?
+A: Yes. Go to "My Orders", select the order, and click "Cancel Item" next to
+   the specific product. This is possible only before that item is dispatched.
+
+Q31: I cancelled my order. When will I get my refund?
+A: Cancellations before dispatch: 5-7 business days.
+   Refused delivery (post-dispatch): 7-10 business days after we receive
+   the returned package.
+
+Q32: Can ShopNest cancel my order?
+A: Yes, in rare cases — such as stock unavailability, payment issues, or
+   pricing errors. We will notify you by email and issue a full refund.
+
+=============================================================
+SECTION F: ACCOUNT & PROFILE
+=============================================================
+
+Q33: How do I create a ShopNest account?
+A: Click "Sign Up" on our website, enter your name, email, and password.
+   You can also sign up using your Google or Facebook account.
+
+Q34: I forgot my password. How do I reset it?
+A: Click "Forgot Password" on the login page. Enter your registered email address
+   and we'll send a password reset link valid for 30 minutes.
+
+Q35: How do I update my phone number or email address?
+A: Log in, go to "My Account" > "Profile Settings" and update your details.
+   Changing your email requires OTP verification on both old and new email.
+
+Q36: How do I delete my ShopNest account?
+A: To delete your account, email support@shopnest.com with your registered
+   email and request for account deletion. Note that active orders, pending
+   refunds, or ongoing disputes must be resolved before deletion.
+
+=============================================================
+SECTION G: PRODUCTS & AVAILABILITY
+=============================================================
+
+Q37: How do I know if a product is in stock?
+A: Product availability is shown on the product page. "Add to Cart" means it's
+   in stock. "Notify Me" means it's out of stock — enter your email to be
+   alerted when it's available again.
+
+Q38: Are the product images accurate?
+A: We strive to show accurate product images. However, slight color variations may
+   occur due to screen display settings. Product descriptions contain exact
+   specifications.
+
+Q39: Can I request a product not listed on ShopNest?
+A: Yes. Fill out the "Product Request" form under "Help & Support" and our
+   team will try to source it. No guarantees on availability.
+
+Q40: Do ShopNest products come with a manufacturer's warranty?
+A: Many electronics, appliances, and branded products come with the manufacturer's
+   warranty. Warranty details are listed on individual product pages.
+
+=============================================================
+SECTION H: LOYALTY POINTS & OFFERS
+=============================================================
+
+Q41: What are ShopNest Rewards Points?
+A: You earn 1 Reward Point for every Rs. 100 spent. 100 points = Rs. 10 discount
+   on future orders. Points are credited within 24 hours of order delivery.
+
+Q42: Do Reward Points expire?
+A: Yes. Points expire 12 months after they are earned if not redeemed.
+   Points from cancelled or returned orders are also reversed.
+
+Q43: How do I redeem my Reward Points?
+A: At checkout, toggle "Use Reward Points" to apply available points. You can
+   use up to 200 points (Rs. 20 discount) per order.
+
+Q44: Why aren't my Reward Points showing up?
+A: Points are credited 24 hours after delivery confirmation. If you don't see
+   them after 48 hours, contact support@shopnest.com with your order ID.
+
+=============================================================
+SECTION I: TECHNICAL ISSUES
+=============================================================
+
+Q45: The website is not loading properly. What should I do?
+A: Try clearing your browser cache, disabling browser extensions, or switching
+   to a different browser or device. If the issue continues, report it at
+   support@shopnest.com.
+
+Q46: I'm not receiving OTP on my phone. What should I do?
+A: Check that your number is registered correctly. Request OTP again after
+   60 seconds. If the issue persists, contact support via email.
+
+Q47: The app keeps crashing. What do I do?
+A: Update the ShopNest app to the latest version. Restart your device and
+   clear the app cache. If it continues to crash, uninstall and reinstall the app.
+
+=============================================================
+SECTION J: CONTACT & SUPPORT
+=============================================================
+
+Q48: How do I contact ShopNest customer support?
+A: You can reach us through:
+   - Email:     support@shopnest.com
+   - Phone:     1-800-SHOPNEST (Mon-Sat, 9 AM - 6 PM IST)
+   - Live Chat: On our website (Mon-Sat, 9 AM - 9 PM IST)
+   - Help Center: www.shopnest.com/help
+
+Q49: What are ShopNest's customer support hours?
+A: Phone and Chat: Monday to Saturday, 9 AM to 9 PM IST.
+   Email responses: Within 24 hours on business days.
+   We are closed on Sundays and national holidays for live support but the
+   self-service Help Center is available 24/7.
+
+Q50: How do I file a complaint against a seller or product?
+A: Use the "Report a Problem" option on your order detail page, or email
+   support@shopnest.com. All complaints are reviewed within 48 hours.
+
+=============================================================
+For more information, visit: www.shopnest.com/help
+=============================================================
