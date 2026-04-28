@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopNest AI Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <main class="app-shell">
+      <header class="app-header">
+        <p class="tag">PHASE 4 PRODUCTION LAYER</p>
+        <h1>ShopNest AI Support</h1>
+        <p class="subtitle">Context-aware support assistant with tool actions, memory, and telemetry.</p>
+      </header>
+
+      <section class="meta-bar">
+        <div>
+          <span class="label">Session</span>
+          <span id="session-id" class="value">Not started</span>
+        </div>
+        <div>
+          <span class="label">Latency</span>
+          <span id="latency" class="value">-</span>
+        </div>
+      </section>
+
+      <section id="chat-log" class="chat-log" aria-live="polite"></section>
+
+      <form id="chat-form" class="chat-form">
+        <textarea id="message" placeholder="Ask about shipping, refunds, or actions like cancel order 123..." required></textarea>
+        <button id="send-btn" type="submit">Send</button>
+      </form>
+
+      <details class="telemetry-panel">
+        <summary>Request Telemetry</summary>
+        <pre id="telemetry-output">No requests yet.</pre>
+      </details>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

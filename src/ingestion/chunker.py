@@ -7,16 +7,13 @@ FAQ file      → one chunk per Q&A pair
 Each chunk gets metadata:
     {source, section, category, chunk_type}
 """
-
 import re
 import sys
 from pathlib import Path
 from typing import List
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))   
 from langchain_core.documents import Document
-from src.config import DATA_DIR, POLICY_FILES, FAQ_FILE, CATEGORY_MAP
+from src.config import DATA_DIR, POLICY_FILES, FAQ_FILE, CATEGORY_MAP   
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────
@@ -26,7 +23,6 @@ def _to_key(text: str) -> str:
     text = re.sub(r"^\d+\.\s*", "", text)          # remove leading number
     text = re.sub(r"[^a-z0-9 ]", "", text.lower())  # keep alphanumeric + space
     return text.strip().replace(" ", "_")[:60]
-
 
 # ── Module 1a — Policy Chunker ─────────────────────────────────────────────
 
@@ -109,12 +105,11 @@ _FAQ_SECTION_CATEGORIES = {
 }
 
 
-def _get_faq_category(section_header: str) -> str:
-    for keyword, cat in _FAQ_SECTION_CATEGORIES.items():
+def _get_faq_category(section_header: str) ->str:
+    for keyword , cat in _FAQ_SECTION_CATEGORIES.items():
         if keyword in section_header.upper():
             return cat
     return "faq"
-
 
 def chunk_faq_file(filepath: Path) -> List[Document]:
     """
@@ -224,4 +219,5 @@ def chunk_all_documents() -> List[Document]:
         print(f"[WARNING] {FAQ_FILE} not found — skipping")
 
     print(f"\n  Total chunks: {len(all_docs)}")
-    return all_docs
+    return all_docs    
+

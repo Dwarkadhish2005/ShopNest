@@ -13,19 +13,23 @@ FAISS_INDEX_DIR = BASE_DIR / "faiss_index"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"   # lightweight, free, runs locally
 
 # ── Retrieval ──────────────────────────────────────────────────────────────
-TOP_K = 4   # chunks returned per query
+TOP_K = 3   # chunks returned per query
 
-# ── LLM Provider ('groq' = free ✅  |  'openai' = paid) ───────────────────
-LLM_PROVIDER    = os.getenv("LLM_PROVIDER", "groq")
+# ── LLM Provider ('groq' = free ✅  ) ───────────────────
+LLM_PROVIDER    = "groq"
 LLM_TEMPERATURE = 0.0   # deterministic → no hallucination
 
 # ── Groq (FREE — https://console.groq.com) ────────────────────────────────
 GROQ_API_KEY    = os.getenv("GROQ_API_KEY", "")
 GROQ_MODEL      = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
-# ── OpenAI (paid fallback) ─────────────────────────────────────────────────
-OPENAI_API_KEY  = os.getenv("OPENAI_API_KEY", "")
-LLM_MODEL       = os.getenv("LLM_MODEL", "gpt-3.5-turbo")
+# ── API runtime ─────────────────────────────────────────────────────────────
+API_HOST = os.getenv("API_HOST", "127.0.0.1")
+API_PORT = int(os.getenv("API_PORT", "8000"))
+
+# ── Observability ───────────────────────────────────────────────────────────
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+ENABLE_PHOENIX = os.getenv("ENABLE_PHOENIX", "false").lower() == "true"
 
 # ── Files ──────────────────────────────────────────────────────────────────
 POLICY_FILES = [

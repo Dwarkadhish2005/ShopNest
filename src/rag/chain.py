@@ -6,19 +6,13 @@ If the answer is not there → "I don't have information about that."
 
 Returns a structured dict so callers can log everything (Phase 4 / Phoenix).
 """
-
 import sys
 from pathlib import Path
-from typing import List, Optional
-
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from langchain_core.documents import Document
 from langchain.prompts import ChatPromptTemplate
 
 from src.rag.context_assembler import assemble_context, get_sources_summary
-
-
 # ── Strict RAG Prompt ──────────────────────────────────────────────────────
 
 _SYSTEM_PROMPT = """You are a helpful and professional customer support agent for ShopNest, an e-commerce platform.
@@ -28,7 +22,7 @@ STRICT RULES:
 2. If the answer is NOT in the context, respond exactly:
    "I don't have information about that in our current policies. Please contact support@shopnest.com for help."
 3. Be concise, clear, and friendly.
-4. Never make up order statuses, timelines, or policies.
+4. Never make up order status, timelines, or policies.
 
 CONTEXT:
 {context}
@@ -52,15 +46,13 @@ class RAGChain:
         if llm is None:
             from src.llm import get_llm
             llm = get_llm()
-
-        # Import here to avoid loading retriever before index exists
         if retriever is None:
             from src.rag.retriever import ShopNestRetriever
             retriever = ShopNestRetriever()
-
+        
         self.retriever = retriever
-        self.llm       = llm
-        self.chain     = _PROMPT | self.llm
+        self.llm = llm
+        self.chain = _PROMPT | self.llm
 
     def ask(self, question: str) -> dict:
         """

@@ -5,7 +5,6 @@ Returns the correct LLM based on LLM_PROVIDER in .env.
 
 Supported providers:
   - groq   (FREE ✅ — recommended)  console.groq.com
-  - openai (paid)
 
 Add new providers here without touching agent or chain code.
 """
@@ -16,7 +15,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.config import (
     LLM_PROVIDER,
     GROQ_API_KEY, GROQ_MODEL,
-    OPENAI_API_KEY, LLM_MODEL,
     LLM_TEMPERATURE,
 )
 
@@ -47,21 +45,8 @@ def get_llm():
             groq_api_key=GROQ_API_KEY,
         )
 
-    elif provider == "openai":
-        if not OPENAI_API_KEY:
-            raise EnvironmentError(
-                "OPENAI_API_KEY is not set.\n"
-                "Add it to your .env file."
-            )
-        from langchain_openai import ChatOpenAI
-        return ChatOpenAI(
-            model=LLM_MODEL,
-            temperature=LLM_TEMPERATURE,
-            openai_api_key=OPENAI_API_KEY,
-        )
-
     else:
         raise ValueError(
             f"Unknown LLM_PROVIDER: '{provider}'. "
-            "Supported values: 'groq', 'openai'"
+            "Supported values: 'groq'"
         )

@@ -24,9 +24,17 @@ from src.config import EMBEDDING_MODEL, FAISS_INDEX_DIR
 def get_embeddings() -> HuggingFaceEmbeddings:
     """Return the embedding model (Module 3)."""
     print(f"  Loading embedding model: {EMBEDDING_MODEL} ...")
+    device = "cpu"
+    try:
+        import torch
+        if torch.cuda.is_available():
+            device = "cuda"
+    except Exception:
+        device = "cpu"
+
     return HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL,
-        model_kwargs={"device": "cpu"},
+        model_kwargs={"device": device},
         encode_kwargs={"normalize_embeddings": True},
     )
 

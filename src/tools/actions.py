@@ -1,19 +1,16 @@
 import uuid
-from typing import Optional
 
 def check_order_status(order_id: str) -> str:
     """
     Check the current status of an order.
-    
     Args:
         order_id (str): The ID of the order to check.
-    
     Returns:
         str: The status of the order (e.g., 'shipped', 'delivered', 'pending').
     """
     if not order_id:
         return "Please provide an order ID to check its status."
-    
+
     # Mock business logic
     if "123" in order_id:
         return f"Order {order_id} is currently: pending"
