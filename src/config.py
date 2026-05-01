@@ -27,9 +27,15 @@ GROQ_MODEL      = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 API_HOST = os.getenv("API_HOST", "127.0.0.1")
 API_PORT = int(os.getenv("API_PORT", "8000"))
 
-# ── Observability ───────────────────────────────────────────────────────────
+# ── Observability & Monitoring ──────────────────────────────────────────
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+
+# Phoenix Tracing Configuration
 ENABLE_PHOENIX = os.getenv("ENABLE_PHOENIX", "false").lower() == "true"
+PHOENIX_PROJECT_NAME = os.getenv("PHOENIX_PROJECT_NAME", "shopnest-production")
+PHOENIX_COLLECTOR_ENDPOINT = os.getenv("PHOENIX_COLLECTOR_ENDPOINT", "http://127.0.0.1:6006/v1/traces")
+PHOENIX_API_KEY = os.getenv("PHOENIX_API_KEY", "")          # Cloud only; empty = local
+PHOENIX_CAPTURE_LLM_DETAILS = os.getenv("PHOENIX_CAPTURE_LLM_DETAILS", "true").lower() == "true"
 
 # ── Files ──────────────────────────────────────────────────────────────────
 POLICY_FILES = [
