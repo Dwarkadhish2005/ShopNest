@@ -221,3 +221,4 @@ def chunk_all_documents() -> List[Document]:
     print(f"\n  Total chunks: {len(all_docs)}")
     return all_docs    
 
+
