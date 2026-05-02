@@ -157,3 +157,13 @@ def observability_status() -> dict:
 # ── Startup logging ────────────────────────────────────────────────────────
 logger.info(f"ShopNest API v4.0.0 initialized | Phoenix: {'✓ ENABLED' if phoenix_enabled else '✗ DISABLED'}")
 
+@app.get("/admin/cache/stats")
+def get_cache_stats() -> dict:
+    """Get the latest cache stats for the service."""
+    return service.cache.stats()
+
+@app.delete("/admin/cache/invalidate")
+def invalidate_cache(query: str = None) -> dict:
+    """Invalidate a specific cache or the whole cache."""
+    service.cache.invalidate(query)
+    return {"message": "cache invalidated", "query": query}

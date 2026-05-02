@@ -13,7 +13,9 @@ FAISS_INDEX_DIR = BASE_DIR / "faiss_index"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"   # lightweight, free, runs locally
 
 # ── Retrieval ──────────────────────────────────────────────────────────────
-TOP_K = 3   # chunks returned per query
+TOP_K     = int(os.getenv("TOP_K", "3"))       # default chunks per query
+TOP_K_MIN = int(os.getenv("TOP_K_MIN", "2"))   # dynamic range lower bound
+TOP_K_MAX = int(os.getenv("TOP_K_MAX", "6"))   # dynamic range upper bound
 
 # ── LLM Provider ('groq' = free ✅  ) ───────────────────
 LLM_PROVIDER    = "groq"
@@ -36,6 +38,17 @@ PHOENIX_PROJECT_NAME = os.getenv("PHOENIX_PROJECT_NAME", "shopnest-production")
 PHOENIX_COLLECTOR_ENDPOINT = os.getenv("PHOENIX_COLLECTOR_ENDPOINT", "http://127.0.0.1:6006/v1/traces")
 PHOENIX_API_KEY = os.getenv("PHOENIX_API_KEY", "")          # Cloud only; empty = local
 PHOENIX_CAPTURE_LLM_DETAILS = os.getenv("PHOENIX_CAPTURE_LLM_DETAILS", "true").lower() == "true"
+
+# ── Performance & Caching ──────────────────────────────────────────────────
+CACHE_TTL_SECONDS    = int(os.getenv("CACHE_TTL_SECONDS", "300"))   # 5 min response cache TTL
+CACHE_MAX_SIZE       = int(os.getenv("CACHE_MAX_SIZE", "256"))       # max cached responses
+EMBEDDING_CACHE_SIZE = int(os.getenv("EMBEDDING_CACHE_SIZE", "512")) # max cached embedding vectors
+
+# ── Advanced Retrieval ─────────────────────────────────────────────────────
+# Reranker: cross-encoder/ms-marco-MiniLM-L-6-v2 (free, ~70MB, local)
+ENABLE_RERANKER  = os.getenv("ENABLE_RERANKER", "true").lower() == "true"
+RERANKER_MODEL   = os.getenv("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
+MULTI_QUERY_VARIATIONS = int(os.getenv("MULTI_QUERY_VARIATIONS", "3"))  # query variations
 
 # ── Files ──────────────────────────────────────────────────────────────────
 POLICY_FILES = [
