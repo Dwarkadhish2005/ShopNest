@@ -4,7 +4,7 @@ import logging
 import uuid
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -12,6 +12,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 
 from src.api.schemas import ChatRequest, ChatResponse, HistoryMessage, SessionHistoryResponse
 from src.api.service import ShopNestService
+from src.voice.voice_pipeline import run_voice_pipeline
 from src.observability.phoenix import init_phoenix, is_phoenix_enabled
 from src.config import (
     ENABLE_PHOENIX,
@@ -111,6 +112,25 @@ def chat(payload: ChatRequest) -> ChatResponse:
         raise HTTPException(
             status_code=500, 
             detail=f"Agent failure: {str(exc)[:200]}"
+        ) from exc
+
+
+@app.post("/voice")
+async def voice_chat(file: UploadFile = File(...), session_id: str = "default_voice_session"):
+    """
+    Voice endpoint:
+    1. STT (Speech to Text)
+    2. Agent processing
+    3. TTS (Text to Speech)
+    """
+    try:
+        audio_path = run_voice_pipeline(file, session_id)
+        return FileResponse(audio_path, media_type="audio/mpeg")
+    except Exception as exc:
+        logger.exception(f"Voice chat request failed")
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Voice agent failure: {str(exc)[:200]}"
         ) from exc
 
 

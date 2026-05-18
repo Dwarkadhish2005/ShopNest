@@ -83,6 +83,7 @@ class MultiQueryRetriever:
         self._llm = llm
         self.n_variations = n_variations
         self._chain = _MULTI_QUERY_PROMPT | llm
+        
 
     def retrieve(self, query: str, k: int = 3) -> List[Document]:
         """
