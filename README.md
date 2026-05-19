@@ -619,4 +619,4 @@ curl -X POST http://localhost:8000/chat \
 ---
 
 **ShopNest v4.0.0** — Enterprise AI for E-Commerce  
-Built with LangChain, FAISS, Groq, and FastAPI
+Built with LangChain, FAISS, Groq, and FastAPI.
