@@ -15,7 +15,7 @@ EMBEDDING_MODEL = "all-MiniLM-L6-v2"   # lightweight, free, runs locally
 # ── Retrieval ──────────────────────────────────────────────────────────────
 TOP_K     = int(os.getenv("TOP_K", "3"))       # default chunks per query
 TOP_K_MIN = int(os.getenv("TOP_K_MIN", "2"))   # dynamic range lower bound
-TOP_K_MAX = int(os.getenv("TOP_K_MAX", "6"))   # dynamic range upper bound
+TOP_K_MAX = int(os.getenv("TOP_K_MAX", "4"))   # dynamic range upper bound
 
 # ── LLM Provider ('groq' = free ✅  ) ───────────────────
 LLM_PROVIDER    = "groq"
@@ -24,6 +24,10 @@ LLM_TEMPERATURE = 0.0   # deterministic → no hallucination
 # ── Groq (FREE — https://console.groq.com) ────────────────────────────────
 GROQ_API_KEY    = os.getenv("GROQ_API_KEY", "")
 GROQ_MODEL      = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+
+# ── Voice Processing ──────────────────────────────────────────────────────
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
+ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "UgBBYS2sOqTuMpoF3BR0")  # Rachel voice
 
 # ── API runtime ─────────────────────────────────────────────────────────────
 API_HOST = os.getenv("API_HOST", "127.0.0.1")

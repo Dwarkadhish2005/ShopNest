@@ -162,7 +162,7 @@ body {
 
 .chat-form {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   gap: 10px;
 }
 
@@ -203,6 +203,22 @@ button:hover {
 button:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+}
+
+#mic-btn {
+  font-size: 1.2rem;
+  padding: 0 16px;
+  background: linear-gradient(140deg, #10b981, #059669);
+}
+
+#mic-btn.recording {
+  background: #ef4444;
+  animation: pulse-red 1s infinite alternate;
+}
+
+@keyframes pulse-red {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
 }
 
 .telemetry-panel {
