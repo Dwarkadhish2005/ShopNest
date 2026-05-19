@@ -27,7 +27,7 @@ GROQ_MODEL      = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
 # ── Voice Processing ──────────────────────────────────────────────────────
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
-ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "UgBBYS2sOqTuMpoF3BR0")  # Rachel voice
+ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "21m00Tcm4TlvDq8ikWAM")  # Rachel voice
 
 # ── API runtime ─────────────────────────────────────────────────────────────
 API_HOST = os.getenv("API_HOST", "127.0.0.1")

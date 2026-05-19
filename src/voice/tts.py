@@ -23,7 +23,7 @@ def process_text_to_audio(text: str) -> str:
             }
             data = {
                 "text": text,
-                "model_id": "eleven_turbo_v2_5",
+                "model_id": "eleven_monolingual_v1",
                 "voice_settings": {
                     "stability": 0.5,
                     "similarity_boost": 0.5
