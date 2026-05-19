@@ -7,6 +7,5 @@ __pycache__/
 env/
 venv/
 .venv/
-faiss_index/
 .DS_Store
 README_ULTRA_DETAILED.md

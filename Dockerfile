@@ -18,9 +18,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project
 COPY . .
 
-# Build the FAISS index before running the app
-RUN python build_index.py
-
 # Expose the port the app runs on (update if your app uses a different port, e.g., 8000)
 EXPOSE 8000
 
