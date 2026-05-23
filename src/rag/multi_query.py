@@ -1,28 +1,3 @@
-"""
-src/rag/multi_query.py — Multi-Query Retrieval
-===============================================
-Generates multiple query variations from the user's original question,
-retrieves documents for each variation, and unions the results.
-
-Why multi-query?
-  - User's phrasing may not match how docs are written
-  - 1 query → potentially missing relevant chunks
-  - 3 variations → massively improved recall
-
-Example:
-  Original: "how do I get my money back?"
-  Variation 1: "refund procedure for customers"
-  Variation 2: "return and reimbursement policy"
-  Variation 3: "steps to initiate a refund request"
-
-Each variation retrieves different chunks → union covers all angles.
-
-Falls back gracefully to single-query if LLM call fails.
-
-Usage:
-    mq = MultiQueryRetriever(retriever=hybrid_retriever, llm=llm)
-    docs = mq.retrieve("how do i get my money back")
-"""
 
 from __future__ import annotations
 
@@ -41,7 +16,7 @@ from src.config import MULTI_QUERY_VARIATIONS
 
 logger = logging.getLogger(__name__)
 
-# ── Prompt for generating query variations ───────────────────────────────────
+
 
 _MULTI_QUERY_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """You are an expert at generating alternative phrasings of customer support questions
@@ -59,19 +34,6 @@ Output ONLY the {n} variations, one per line. No numbering, no explanation, no b
 
 
 class MultiQueryRetriever:
-    """
-    Retrieves documents using multiple query variations to maximize recall.
-
-    Parameters
-    ----------
-    retriever : object
-        Any retriever with a `.retrieve(query, k)` method
-        (HybridRetriever, ShopNestRetriever, etc.)
-    llm : BaseLanguageModel
-        LLM for generating query variations.
-    n_variations : int
-        Number of query variations to generate (default from config).
-    """
 
     def __init__(
         self,
@@ -86,12 +48,6 @@ class MultiQueryRetriever:
         
 
     def retrieve(self, query: str, k: int = 3) -> List[Document]:
-        """
-        Generate query variations and retrieve docs for each, then union results.
-
-        Deduplicates by page content to avoid returning the same chunk twice.
-        Falls back to single-query retrieve if variation generation fails.
-        """
         variations = self._generate_variations(query)
         all_queries = [query] + variations
 
@@ -101,7 +57,7 @@ class MultiQueryRetriever:
         for i, v in enumerate(variations, 1):
             logger.debug(f"[MultiQuery]   Variation {i}: '{v}'")
 
-        # Retrieve for all queries, union results, deduplicate
+        
         seen_content: set = set()
         all_docs: List[Document] = []
 
@@ -123,10 +79,6 @@ class MultiQueryRetriever:
         return all_docs
 
     def _generate_variations(self, query: str) -> List[str]:
-        """
-        Call the LLM to generate query variations.
-        Returns empty list on failure (triggers single-query fallback).
-        """
         try:
             response = self._chain.invoke({
                 "question": query,
@@ -134,7 +86,7 @@ class MultiQueryRetriever:
             })
             raw = response.content.strip()
             variations = [line.strip() for line in raw.split("\n") if line.strip()]
-            # Take only the expected number; skip if too few or obviously wrong
+            
             valid = [v for v in variations if 5 < len(v) < 200]
             return valid[:self.n_variations]
         except Exception as e:

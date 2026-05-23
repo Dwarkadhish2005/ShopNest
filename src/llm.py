@@ -1,13 +1,3 @@
-"""
-src/llm.py — Centralized LLM Factory
-======================================
-Returns the correct LLM based on LLM_PROVIDER in .env.
-
-Supported providers:
-  - groq   (FREE ✅ — recommended)  console.groq.com
-
-Add new providers here without touching agent or chain code.
-"""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -20,13 +10,6 @@ from src.config import (
 
 
 def get_llm():
-    """
-    Return a LangChain chat model based on the configured provider.
-
-    Raises:
-        EnvironmentError: if the required API key is missing.
-        ValueError: if the provider is unknown.
-    """
     provider = LLM_PROVIDER.lower().strip()
 
     if provider == "groq":

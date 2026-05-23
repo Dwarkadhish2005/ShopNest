@@ -1,14 +1,3 @@
-"""
-src/agent/shop_agent.py — ShopNest Decision Agent
-===================================================
-Uses the modern LangChain create_tool_calling_agent pattern.
-Provider is controlled by LLM_PROVIDER in .env:
-
-  LLM_PROVIDER=groq    → uses ChatGroq (FREE ✅)
-  LLM_PROVIDER=openai  → uses ChatOpenAI (paid)
-
-Default: groq
-"""
 import sys
 import concurrent.futures
 from pathlib import Path
@@ -28,47 +17,42 @@ def build_shop_agent() -> AgentExecutor:
     rag_chain = RAGChain(llm=llm)
     tool_guard = ToolGuard()
 
-    # ── Tool 1: RAG Knowledge Base ─────────────────────────────────────────
-    @tool
+    
+    @tool(description="Search the knowledge base for FAQs, policies, and general info.")
     def knowledge_base(query: str) ->str:
-        """Answer policy and FAQ questions using the ShopNest knowledge base."""
-        # Use ThreadPoolExecutor to run the blocking ask() call for concurrency, if preferred
+        
         with concurrent.futures.ThreadPoolExecutor() as executor:
             future = executor.submit(rag_chain.ask, query)
             result = future.result()
         return result["answer"]
 
-    # ── Tool 2: Check Order Status ─────────────────────────────────────────    
-    @tool
+    
+    @tool(description="Check the status of an order using its order ID.")
     def check_order_status_tool(order_id: str) -> str:
-        """Check current status for a given order_id."""
         res = tool_guard.validate_order_id(order_id)
         if not res.valid:
             return res.reason
         return check_order_status(res.sanitized_value)
 
-    # ── Tool 3: Cancel Order ───────────────────────────────────────────────
-    @tool
+    
+    @tool(description="Cancel an active order using its order ID.")
     def cancel_order_tool(order_id: str) -> str:
-        """Cancel an order by order_id."""
         res = tool_guard.validate_destructive_action("cancel_order", order_id)
         if not res.valid:
             return res.reason
         return cancel_order(res.sanitized_value)
 
-    # ── Tool 4: Initiate Refund ────────────────────────────────────────────    
-    @tool
+    
+    @tool(description="Initiate a refund for an order using its order ID.")
     def initiate_refund_tool(order_id: str) -> str:
-        """Initiate a refund for the given order_id."""
         res = tool_guard.validate_destructive_action("initiate_refund", order_id)
         if not res.valid:
             return res.reason
         return initiate_refund(res.sanitized_value)
     
-    # ── Tool 5: Create Support Ticket ──────────────────────────────────────
-    @tool 
+    
+    @tool(description="Create a support ticket for an issue.")
     def create_support_ticket_tool(issue: str) -> str:
-        """Create a support ticket for the provided issue description."""
         res = tool_guard.validate_issue_text(issue)
         if not res.valid:
             return res.reason
@@ -76,7 +60,7 @@ def build_shop_agent() -> AgentExecutor:
     
     tools = [knowledge_base , check_order_status_tool , cancel_order_tool , initiate_refund_tool , create_support_ticket_tool]
 
-    # ── System Prompt ──────────────────────────────────────────────────────
+    
     prompt = ChatPromptTemplate.from_messages([
         ("system", """You are a helpful customer support agent for ShopNest, an e-commerce platform.
 
@@ -105,12 +89,11 @@ refund amounts, or policy details.
         ("human", "{input}"),
         ("placeholder", "{agent_scratchpad}"),
     ])
-    # ── Build Modern Agent ─────────────────────────────────────────────────
+    
     agent = create_tool_calling_agent(llm=llm , tools=tools , prompt=prompt)
     return AgentExecutor(agent=agent , tools=tools,verbose=True,max_iterations=5,return_intermediate_steps=False)
 
 class ShopAgent:
-    """Wrapper class that includes Layer 1 InputGuard and holds the AgentExecutor."""
     def __init__(self):
         self.input_guard = InputGuard()
         self.executor = build_shop_agent()

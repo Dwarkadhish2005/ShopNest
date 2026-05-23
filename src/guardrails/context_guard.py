@@ -1,16 +1,3 @@
-"""
-src/guardrails/context_guard.py — Context Guard (Layer 2)
-==========================================================
-Evaluates the quality of retrieved chunks BEFORE the LLM sees them.
-If retrieval is weak (low scores, too few chunks) → forces a safe fallback
-response instead of letting the LLM hallucinate.
-
-Usage:
-    guard = ContextGuard()
-    result = guard.evaluate(docs_with_scores)
-    if not result.is_sufficient:
-        return result.fallback_message
-"""
 
 from __future__ import annotations
 
@@ -22,12 +9,12 @@ from langchain_core.documents import Document
 
 logger = logging.getLogger(__name__)
 
-# ── Thresholds ────────────────────────────────────────────────────────────────
-# FAISS returns L2 distance (lower = more similar).
-# A distance > MAX_L2_DISTANCE means the chunk is too dissimilar.
-_MAX_L2_DISTANCE: float = 1.5      # cosine-normalised embeddings → L2 ∈ [0, 2]
-_MIN_CHUNKS_REQUIRED: int = 1      # at least 1 chunk must pass the threshold
-_MIN_CONTENT_LENGTH: int = 20      # ignore empty / trivial chunks
+
+
+
+_MAX_L2_DISTANCE: float = 1.5      
+_MIN_CHUNKS_REQUIRED: int = 1      
+_MIN_CONTENT_LENGTH: int = 20      
 
 
 @dataclass
@@ -40,13 +27,6 @@ class ContextGuardResult:
 
 
 class ContextGuard:
-    """
-    Layer-2 Safety Guard: detects weak retrieval and prevents hallucination
-    by forcing a transparent fallback response.
-
-    Works with FAISS similarity_search_with_score() which returns (doc, L2_distance).
-    Lower L2 distance = better match (0.0 = identical).
-    """
 
     FALLBACK_MSG = (
         "I don't have enough information in our knowledge base to answer that "
@@ -66,16 +46,6 @@ class ContextGuard:
         self,
         docs_with_scores: List[Tuple[Document, float]],
     ) -> ContextGuardResult:
-        """
-        Evaluate retrieved docs quality.
-
-        Args:
-            docs_with_scores: List of (Document, L2_distance) from FAISS.
-                              Lower distance = better match.
-
-        Returns:
-            ContextGuardResult — is_sufficient=False triggers fallback.
-        """
         if not docs_with_scores:
             logger.warning("[ContextGuard] WEAK — no documents retrieved")
             return ContextGuardResult(
@@ -85,7 +55,7 @@ class ContextGuard:
                 passing_chunks=0,
             )
 
-        # Filter chunks that pass score + content-length threshold
+        
         passing = [
             (doc, score)
             for doc, score in docs_with_scores
@@ -119,10 +89,6 @@ class ContextGuard:
         )
 
     def evaluate_docs(self, docs: List[Document]) -> ContextGuardResult:
-        """
-        Convenience method when scores are not available.
-        Checks only chunk count and content length.
-        """
         if not docs:
             return ContextGuardResult(
                 is_sufficient=False,

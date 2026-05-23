@@ -51,9 +51,9 @@ class ShopNestService:
         """
         started = perf_counter()
         
-        # Check cache (only if we have no ongoing session history or history allows it, 
-        # but typical response cache keys might just use the query for stateless FAQ.
-        # Let's keep it simple: cache exact queries)
+        
+        
+        
         cached_response = self.cache.get(message)
         if cached_response is not None:
             latency_ms = (perf_counter() - started) * 1000
@@ -64,25 +64,25 @@ class ShopNestService:
                 "telemetry": {"cached": True}
             }
 
-        # Get conversation history from session store
+        
         history = self.sessions.get_messages(session_id)
         
-        # Create telemetry callback
+        
         callback = AgentTelemetryCallback(
             session_id=session_id,
             capture_llm_details=capture_llm_details
         )
 
         try:
-            # We need to adapt the invoke config parameter if ShopAgent wrapper doesn't support 'config'.
-            # Looking at ShopAgent: `def invoke(self, inputs: dict) -> dict:`
-            # ShopAgent needs to pass kwargs down if we want callbacks. Wait, wait. 
-            # I'll update ShopAgent to accept kwargs for `self.executor.invoke(inputs, **kwargs)`
-            # For now, let's fix ShopAgent in another step if needed. 
-            # Well, it's safer to just do self.agent.executor.invoke if we want to pass config.
             
-            # Let's use ShopAgent's custom invoke but we need to supply config
-            # Wait, `ShopAgent.invoke` does not accept `config` param. Let's fix that too.
+            
+            
+            
+            
+            
+            
+            
+            
             result = self.agent.invoke(
                 {
                     "input": message,
@@ -94,17 +94,17 @@ class ShopNestService:
             
             answer = result.get("output", "")
             
-            # Store in cache
+            
             self.cache.set(message, answer)
             
-            # Persist conversation to session memory
+            
             self.sessions.append_turn(
                 session_id=session_id, 
                 user_text=message, 
                 assistant_text=answer
             )
 
-            # Collect telemetry snapshot
+            
             telemetry = callback.snapshot()
             telemetry["request_latency_ms"] = round(latency_ms, 2)
             telemetry["cached"] = False

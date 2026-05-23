@@ -7,7 +7,6 @@ from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 
 
 class InMemorySessionStore:
-    """Thread-safe in-memory chat history for API sessions."""
 
     def __init__(self, max_turns: int = 12) -> None:
         self._sessions: Dict[str, List[BaseMessage]] = {}

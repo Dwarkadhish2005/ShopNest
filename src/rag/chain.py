@@ -1,19 +1,3 @@
-"""
-src/rag/chain.py — LLM Response Generation (RAG Chain)
-========================================================
-Phase 5 upgrade: Full advanced retrieval pipeline:
-
-    query
-      → InputGuard (reject off-domain)
-      → MultiQueryRetriever (1 query → N variations)
-      → HybridRetriever (FAISS semantic + BM25 keyword, parallel)
-      → Reranker (cross-encoder re-scoring, optional)
-      → ContextGuard (reject weak retrieval → fallback)
-      → LLM (strict RAG prompt)
-
-Falls back gracefully at each stage if components are unavailable.
-Strict prompt: LLM may ONLY answer from provided context.
-"""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
@@ -30,7 +14,7 @@ from src.config import TOP_K
 
 logger = logging.getLogger(__name__)
 
-# ── Strict RAG Prompt ──────────────────────────────────────────────────────
+
 
 _SYSTEM_PROMPT = """You are a helpful and professional customer support agent for ShopNest, an e-commerce platform.
 
@@ -53,22 +37,12 @@ _PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
-# ── RAG Chain ──────────────────────────────────────────────────────────────
+
 
 class RAGChain:
-    """
-    End-to-end RAG chain with Phase 5 advanced retrieval pipeline.
-
-    Pipeline stages:
-      1. MultiQueryRetriever  — expands 1 query to N variations
-      2. HybridRetriever      — FAISS semantic + BM25 keyword (parallel)
-      3. Reranker             — cross-encoder re-scoring (if enabled)
-      4. ContextGuard         — rejects weak retrieval before LLM
-      5. LLM                  — strict context-only generation
-    """
 
     def __init__(self, retriever=None, llm: Optional[BaseLanguageModel] = None):
-        # Accept a pre-built LLM (from agent) or create one via the factory
+        
         if llm is None:
             from src.llm import get_llm
             llm = get_llm()
@@ -77,14 +51,10 @@ class RAGChain:
         self.chain = _PROMPT | self.llm
         self.context_guard = ContextGuard()
 
-        # ── Build advanced retrieval pipeline ─────────────────────────────
+        
         self._retriever = self._build_retriever(retriever, llm)
 
     def _build_retriever(self, base_retriever, llm):
-        """
-        Attempt to build the full hybrid + multi-query retriever pipeline.
-        Falls back to base_retriever → ShopNestRetriever on any failure.
-        """
         try:
             from src.rag.vectorstore import load_vectorstore
             from src.rag.hybrid_retriever import HybridRetriever
@@ -95,7 +65,7 @@ class RAGChain:
             hybrid = HybridRetriever(vectorstore=vs)
             reranker = Reranker()
 
-            # Wrap hybrid with reranker in a thin adapter
+            
             class RerankedHybrid:
                 def __init__(self, hybrid, reranker, top_k):
                     self._hybrid = hybrid
@@ -104,7 +74,7 @@ class RAGChain:
 
                 def retrieve(self, query: str, k: int = None) -> list:
                     k = k or self._top_k
-                    docs = self._hybrid.retrieve(query, k=k * 2)  # fetch 2× for reranker
+                    docs = self._hybrid.retrieve(query, k=k * 2)  
                     return self._reranker.rerank(query, docs, top_k=k)
 
                 def retrieve_with_scores(self, query: str, k: int = None) -> list:
@@ -112,11 +82,11 @@ class RAGChain:
                     docs_with_scores = self._hybrid.retrieve_with_scores(query, k=k * 2)
                     docs = [d for d, _ in docs_with_scores]
                     reranked = self._reranker.rerank(query, docs, top_k=k)
-                    return [(doc, 0.0) for doc in reranked]  # scores not meaningful post-rerank
+                    return [(doc, 0.0) for doc in reranked]  
 
             reranked_hybrid = RerankedHybrid(hybrid, reranker, TOP_K)
 
-            # Wrap with multi-query for best recall
+            
             multi_query = MultiQueryRetriever(
                 retriever=reranked_hybrid,
                 llm=llm,
@@ -135,28 +105,14 @@ class RAGChain:
             return ShopNestRetriever()
 
     def ask(self, question: str) -> dict:
-        """
-        Run the full RAG pipeline for one question.
-
-        Returns:
-            {
-                "question":          str,
-                "answer":            str,
-                "retrieved_chunks":  List[Document],
-                "context_used":      str,
-                "sources":           str,
-                "context_sufficient": bool,
-                "pipeline":          str,
-            }
-        """
-        # ── Stage 1: Retrieve (multi-query + hybrid + rerank) ──────────────
+        
         try:
             docs = self._retriever.retrieve(question, k=TOP_K)
         except TypeError:
-            # Some retrievers don't accept k kwarg
+            
             docs = self._retriever.retrieve(question)
 
-        # ── Stage 2: Context Guard ─────────────────────────────────────────
+        
         guard_result = self.context_guard.evaluate_docs(docs)
 
         if not guard_result.is_sufficient:
@@ -174,11 +130,11 @@ class RAGChain:
                 "pipeline":           "context_guard_fallback",
             }
 
-        # ── Stage 3: Assemble context ──────────────────────────────────────
+        
         context = assemble_context(docs)
         sources = get_sources_summary(docs)
 
-        # ── Stage 4: LLM generation ────────────────────────────────────────
+        
         response = self.chain.invoke({
             "context":  context,
             "question": question,

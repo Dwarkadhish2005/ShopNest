@@ -1,14 +1,3 @@
-"""
-MODULE 6 — Context Assembler
-=============================
-Takes retrieved Document chunks and formats them into a clean context
-block ready for the LLM prompt.
-
-Rules:
-  - Each chunk is labelled with its source + section
-  - Chunks are numbered for easy reference
-  - Total context is capped to avoid overwhelming the LLM
-"""
 
 import sys
 from pathlib import Path
@@ -18,21 +7,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from langchain_core.documents import Document
 
-MAX_CHARS_PER_CHUNK = 800   # truncate very long chunks
-MAX_TOTAL_CHARS     = 3000  # safety cap on total context
+MAX_CHARS_PER_CHUNK = 800   
+MAX_TOTAL_CHARS     = 3000  
 
 
 def assemble_context(docs: List[Document]) -> str:
-    """
-    Convert a list of retrieved chunks into a formatted context string.
-
-    Example output:
-        [1] Source: refund_policy | Section: processing_time
-        After approval, the refund is credited …
-
-        [2] Source: faq | Section: returns_refunds
-        Q24: How long does it take to get a refund? …
-    """
     if not docs:
         return "No relevant information found in the knowledge base."
 
@@ -62,7 +41,6 @@ def assemble_context(docs: List[Document]) -> str:
 
 
 def get_sources_summary(docs: List[Document]) -> str:
-    """Return a compact one-line summary of which sources were used."""
     seen = []
     for doc in docs:
         tag = "{source}:{section}".format(**doc.metadata)

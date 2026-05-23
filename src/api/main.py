@@ -23,21 +23,21 @@ from src.config import (
     PHOENIX_CAPTURE_LLM_DETAILS
 )
 
-# ── Configure Logging ──────────────────────────────────────────────────────
+
 logging.basicConfig(
     level=getattr(logging, LOG_LEVEL.upper(), logging.INFO),
     format="%(asctime)s %(levelname)s [%(name)s] - %(message)s",
 )
 logger = logging.getLogger(__name__)
 
-# ── Initialize FastAPI App ─────────────────────────────────────────────────
+
 app = FastAPI(
     title="ShopNest AI API", 
     version="4.0.0",
     description="Enterprise-grade customer support AI with Phoenix observability"
 )
 
-# ── Initialize Phoenix Tracing (safe no-op if disabled or fails) ───────────
+
 phoenix_enabled = init_phoenix(
     enable_phoenix=ENABLE_PHOENIX,
     project_name=PHOENIX_PROJECT_NAME,
@@ -45,7 +45,7 @@ phoenix_enabled = init_phoenix(
     api_key=PHOENIX_API_KEY or None,
 )
 
-# ── Initialize Service ─────────────────────────────────────────────────────
+
 try:
     service = ShopNestService(max_turns=12)
     logger.info("✓ ShopNest service initialized successfully")
@@ -53,7 +53,7 @@ except Exception as e:
     logger.exception("Failed to initialize ShopNest service")
     raise
 
-# ── CORS Middleware ───────────────────────────────────────────────────────
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -62,22 +62,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Static Files ───────────────────────────────────────────────────────────
+
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
-# ── API Endpoints ──────────────────────────────────────────────────────────
+
 
 @app.get("/", include_in_schema=False)
 def root() -> FileResponse:
-    """Serve the frontend UI."""
     return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get("/health")
 def health() -> dict:
-    """Health check endpoint."""
     return {
         "status": "ok",
         "service": "shopnest-api",
@@ -88,11 +86,6 @@ def health() -> dict:
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(payload: ChatRequest) -> ChatResponse:
-    """
-    Main chat endpoint for customer support queries.
-    
-    Supports optional session management and returns telemetry data.
-    """
     session_id = payload.session_id or f"sess-{uuid.uuid4().hex[:12]}"
 
     try:
@@ -117,12 +110,6 @@ def chat(payload: ChatRequest) -> ChatResponse:
 
 @app.post("/voice")
 async def voice_chat(file: UploadFile = File(...), session_id: str = "default_voice_session"):
-    """
-    Voice endpoint:
-    1. STT (Speech to Text)
-    2. Agent processing
-    3. TTS (Text to Speech)
-    """
     try:
         audio_path = run_voice_pipeline(file, session_id)
         return FileResponse(audio_path, media_type="audio/mpeg")
@@ -136,7 +123,6 @@ async def voice_chat(file: UploadFile = File(...), session_id: str = "default_vo
 
 @app.get("/sessions/{session_id}", response_model=SessionHistoryResponse)
 def get_session_history(session_id: str) -> SessionHistoryResponse:
-    """Retrieve conversation history for a session."""
     if not service.sessions.session_exists(session_id):
         raise HTTPException(status_code=404, detail="Session not found")
 
@@ -153,7 +139,6 @@ def get_session_history(session_id: str) -> SessionHistoryResponse:
 
 @app.delete("/sessions/{session_id}")
 def clear_session(session_id: str) -> dict:
-    """Clear conversation history for a session."""
     cleared = service.sessions.clear_session(session_id)
     return {
         "session_id": session_id, 
@@ -164,7 +149,6 @@ def clear_session(session_id: str) -> dict:
 
 @app.get("/observability/status")
 def observability_status() -> dict:
-    """Get observability system status."""
     return {
         "phoenix_enabled": is_phoenix_enabled(),
         "phoenix_project": PHOENIX_PROJECT_NAME,
@@ -174,16 +158,14 @@ def observability_status() -> dict:
     }
 
 
-# ── Startup logging ────────────────────────────────────────────────────────
+
 logger.info(f"ShopNest API v4.0.0 initialized | Phoenix: {'✓ ENABLED' if phoenix_enabled else '✗ DISABLED'}")
 
 @app.get("/admin/cache/stats")
 def get_cache_stats() -> dict:
-    """Get the latest cache stats for the service."""
     return service.cache.stats()
 
 @app.delete("/admin/cache/invalidate")
 def invalidate_cache(query: str = None) -> dict:
-    """Invalidate a specific cache or the whole cache."""
     service.cache.invalidate(query)
     return {"message": "cache invalidated", "query": query}

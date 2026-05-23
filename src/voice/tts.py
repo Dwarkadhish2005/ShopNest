@@ -5,10 +5,6 @@ from src.config import ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID
 import gtts
 
 def process_text_to_audio(text: str) -> str:
-    """
-    Converts text to speech using ElevenLabs (if configured) or falls back to gTTS (Google TTS).
-    Returns the path to the generated audio file.
-    """
     temp_audio = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
     audio_path = temp_audio.name
     temp_audio.close()
@@ -39,19 +35,19 @@ def process_text_to_audio(text: str) -> str:
                 return audio_path
             else:
                 print(f"ElevenLabs TTS failed: {response.text}")
-                # Fall through to fallback
+                
         except Exception as e:
             print(f"ElevenLabs TTS exception: {str(e)}")
-            # Fall through to fallback
             
-    # Fallback to gtts (free) if ElevenLabs fails or is not configured
+            
+    
     try:
         from gtts import gTTS
         tts = gTTS(text=text, lang='en')
         tts.save(audio_path)
     except Exception as e:
         print(f"gTTS fallback failed: {str(e)}")
-        # Create an empty file just so it doesn't crash
+        
         with open(audio_path, 'wb') as f:
             pass
             

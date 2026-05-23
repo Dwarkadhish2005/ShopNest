@@ -75,9 +75,9 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-// Voice handling
+
 micBtn.addEventListener("pointerdown", async (e) => {
-  e.preventDefault(); // prevent text selection
+  e.preventDefault(); 
   if (isRecording) return;
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -95,7 +95,7 @@ micBtn.addEventListener("pointerdown", async (e) => {
     
     mediaRecorder.start();
     isRecording = true;
-    micBtn.classList.add("recording"); // User feedback indicator
+    micBtn.classList.add("recording"); 
   } catch (err) {
     appendMessage("error", "Microphone access denied or error: " + err.message);
   }
@@ -132,13 +132,13 @@ async function sendVoice(audioBlob) {
       throw new Error(await response.text());
     }
 
-    // Play the audio
+    
     const blob = await response.blob();
     const url = URL.createObjectURL(blob);
     const audio = new Audio(url);
     
-    // We append a generic text message since STT transcrip/agent result isn't passed back yet in JSON format,
-    // the endpoint simply returns audio file.
+    
+    
     appendMessage("assistant", "🔊 (Audio response playing...)");
     audio.play();
 

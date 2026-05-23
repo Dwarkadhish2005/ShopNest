@@ -1,4 +1,3 @@
-"""Entrypoint to run the Phase 4 FastAPI app locally."""
 
 import uvicorn
 

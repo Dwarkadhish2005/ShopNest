@@ -1,10 +1,3 @@
-"""
-evaluation.py
-
-Runs an automated evaluation test suite on the ShopNest Agent.
-Measures: Accuracy, Hallucination (Grounding), and Retrieval Quality.
-Results are traced in Arize Phoenix.
-"""
 
 import os
 import sys
@@ -14,14 +7,14 @@ import warnings
 from typing import List, Dict
 from pathlib import Path
 
-# Suppress Pydantic warnings for cleaner output
+
 warnings.filterwarnings("ignore")
 
-# Force Phoenix environment variables for evaluation
+
 os.environ["ENABLE_PHOENIX"] = "true"
 os.environ["PHOENIX_PROJECT_NAME"] = "shopnest-evaluation"
 
-# Adjust path to import shopnest modules
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 try:
@@ -37,14 +30,14 @@ from src.observability.phoenix import init_phoenix
 
 console = Console()
 
-# 1. Initialize Phoenix
+
 init_phoenix(
     enable_phoenix=True,
     project_name=os.environ["PHOENIX_PROJECT_NAME"],
     endpoint=os.environ.get("PHOENIX_COLLECTOR_ENDPOINT", "http://127.0.0.1:6006/v1/traces")
 )
 
-# 2. Initialize Service & Evaluator LLM
+
 try:
     service = ShopNestService()
     eval_llm = get_llm()
@@ -52,27 +45,26 @@ except Exception as e:
     console.print(f"[red]Error initializing service/LLM. Is your .env configured?[/red]\n{e}")
     sys.exit(1)
 
-# 3. Test Dataset (10 Queries)
+
 TEST_QUERIES = [
-    # -- RAG / Informational Queries --
+    
     {"query": "What is the refund policy?", "expected": "Explain the general refund policy conditions."},
     {"query": "Can I return an item after 10 days?", "expected": "Clarify the number of days allowed for returns based on policy."},
     {"query": "How long does shipping take?", "expected": "Provide shipping timelines."},
     {"query": "Where are you located?", "expected": "Provide location details if in FAQ."},
     
-    # -- Action Queries --
+    
     {"query": "Check the status of my order ORD-123", "expected": "Call check_order_status and return 'pending'."},
     {"query": "Cancel my order 123", "expected": "Call cancel_order and confirm cancellation."},
     {"query": "Initiate a refund for order 123", "expected": "Call initiate_refund and confirm."},
     {"query": "Create a support ticket for a broken screen", "expected": "Call create_support_ticket and return a ticket ID."},
     
-    # -- Mixed & Edge Cases --
+    
     {"query": "What is the refund policy and also cancel order 123", "expected": "Provide refund policy info AND confirm cancellation of order 123."},
     {"query": "Cancel my order", "expected": "Ask the user to provide an order ID since it's missing."}
 ]
 
 def evaluate_with_llm(query: str, expected: str, actual: str, tools_used: List[str]) -> dict:
-    """Uses LLM-as-a-judge to evaluate Accuracy, Hallucination, and Retrieval Quality."""
     
     prompt = f"""
     You are an expert AI system evaluator.
@@ -89,19 +81,19 @@ def evaluate_with_llm(query: str, expected: str, actual: str, tools_used: List[s
     - "retrieval_quality": Did the AI use the correct tools to get the answer? If policy/context was needed, did it call 'knowledge_base'? If an action was needed, did it call an action tool? (1-5)
     
     Respond EXACTLY with valid JSON only. Format:
-    {{
+    { 
         "accuracy": 5,
         "hallucination": 5,
         "retrieval_quality": 5,
         "reasoning": "brief explanation"
-    }}
+    } 
     """
     
     from langchain_core.messages import HumanMessage
     response = eval_llm.invoke([HumanMessage(content=prompt)])
     content = response.content.strip()
     
-    # Strip markdown formatting if present
+    
     if content.startswith("```json"):
         content = content[7:-3].strip()
     elif content.startswith("```"):
@@ -136,7 +128,7 @@ def run_evaluation():
         
         console.print(f"[dim]Running {i}/{len(TEST_QUERIES)}:[/dim] {query}")
         
-        # 1. Ask Service
+        
         try:
             result_payload = service.ask(session_id=session_id, message=query)
             actual_response = result_payload["response"]
@@ -145,10 +137,10 @@ def run_evaluation():
             actual_response = f"Error during execution: {str(e)}"
             telemetry = {}
         
-        # 2. Extract tools used from telemetry
+        
         tool_events = telemetry.get("tool_events", [])
         
-        # Handle dict or dataclass ToolEvents safely
+        
         tools_used = []
         for t in tool_events:
             if hasattr(t, "name"):
@@ -156,7 +148,7 @@ def run_evaluation():
             elif isinstance(t, dict):
                 tools_used.append(t.get("name", "unknown"))
                 
-        # 3. LLM-as-a-judge evaluation
+        
         eval_result = evaluate_with_llm(query, expected, actual_response, tools_used)
         
         acc = eval_result.get("accuracy", 0)
@@ -168,7 +160,7 @@ def run_evaluation():
         total_hall += hall
         total_retr += retr
         
-        # Highlight failures in red
+        
         acc_str = f"[green]{acc}[/green]" if acc >= 4 else f"[{'yellow' if acc == 3 else 'red'}]{acc}[/]"
         hall_str = f"[green]{hall}[/green]" if hall >= 4 else f"[red]{hall}[/red]"
         retr_str = f"[green]{retr}[/green]" if retr >= 4 else f"[red]{retr}[/red]"
@@ -178,7 +170,7 @@ def run_evaluation():
     console.print("\n")
     console.print(table)
     
-    # Print Summary
+    
     avg_acc = total_acc / len(TEST_QUERIES)
     avg_hall = total_hall / len(TEST_QUERIES)
     avg_retr = total_retr / len(TEST_QUERIES)
