@@ -15,7 +15,6 @@ from src.rag.vectorstore import build_and_save_vectorstore
 
 console = Console()
 
-
 def main():
     console.print(Panel.fit(
         "[bold cyan]ShopNest - RAG Index Builder[/bold cyan]\n"
